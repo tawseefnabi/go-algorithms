@@ -18,4 +18,9 @@ func second() {
 func main() {
 	defer second()
 	first()
+
+	// Deferred functions are executed in LIFO order, so the below code prints: 4 3 2 1 0.
+	for i := 0; i < 5; i++ {
+		defer fmt.Printf("%d ", i)
+	}
 }
