@@ -11,6 +11,18 @@ type Employee struct {
 	MonthlySalary              []Salary
 }
 
+func (e *Employee) EmpInfo() string {
+	fmt.Println("Name: ", e.FirstName, e.LastName)
+	fmt.Println("Age: ", e.Age)
+	fmt.Println("Email: ", e.Email)
+	for _, info := range e.MonthlySalary {
+		fmt.Println("===================")
+		fmt.Println("Basic: ", info.Basic)
+		fmt.Println("HRA: ", info.HRA)
+		fmt.Println("TA: ", info.TA)
+	}
+	return "---------"
+}
 func main() {
 	e := Employee{
 		FirstName: "Mark",
@@ -36,11 +48,6 @@ func main() {
 		},
 	}
 
-	fmt.Println(e.FirstName, e.LastName)
-	fmt.Println(e.Age)
-	fmt.Println(e.Email)
-	fmt.Println(e.MonthlySalary[0])
-	fmt.Println(e.MonthlySalary[1])
-	fmt.Println(e.MonthlySalary[2])
+	e.EmpInfo()
 
 }
