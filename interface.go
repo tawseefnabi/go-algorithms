@@ -28,7 +28,8 @@ func (e Emp) PrintSalary(basic int, tax int) int {
 }
 
 func main() {
-	var e1 = Emp(1)
+	var e1 Employee
+	e1 = Emp(1)
 	e1.PrintName("John Doe")
 	e1.PrintSalary(25000, 5)
 }
