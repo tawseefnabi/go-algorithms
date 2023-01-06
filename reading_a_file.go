@@ -24,14 +24,11 @@ func main() {
 	}
 
 	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-	var textLines []string
+	scanner.Split(bufio.ScanWords)
+	// var textLines []string
 
 	for scanner.Scan() {
-		textLines = append(textLines, scanner.Text())
+		fmt.Println(scanner.Text())
 	}
 	file.Close()
-	for _, eacLine := range textLines {
-		fmt.Println(eacLine)
-	}
 }
