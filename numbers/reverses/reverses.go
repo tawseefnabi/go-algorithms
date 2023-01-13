@@ -1,5 +1,6 @@
 package reverses
 
+// reverse of number
 func Reverse(number int) int {
 	reverse := 0
 	for number != 0 {
