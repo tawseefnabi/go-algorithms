@@ -24,4 +24,10 @@ func main() {
 
 	cname, _ := net.LookupCNAME("www.facebook.com")
 	fmt.Println("cname", cname)
+
+	var rect = map[string]int{}
+	var rect2 = map[string]int{"height": 10}
+	var rect3 map[string]int
+	rect["height"] = 10
+	fmt.Println(rect2, rect["height"], "rect3", rect3)
 }
