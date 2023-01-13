@@ -1,7 +1,10 @@
 package primes
 
+import "fmt"
+
 // IsPrime determines if a number is prime
 func IsPrime(number int) bool {
+	fmt.Println("Testing Reverse of Number: ")
 	if number <= 1 {
 		return false
 	}
