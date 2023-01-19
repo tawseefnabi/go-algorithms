@@ -25,6 +25,9 @@ package sorts
 // ( 1 2 4 5 8 ) –> ( 1 2 4 5 8 )
 // ( 1 2 4 5 8 ) –> ( 1 2 4 5 8 )
 // Illustration:
+import (
+	"github.com/tawseefnabi/go-algorithms/constraints"
+)
 
 // Bubble is a simple generic definition of Bubble sort algorithm.
 func BubbleSort(array []int) []int {
@@ -36,4 +39,19 @@ func BubbleSort(array []int) []int {
 		}
 	}
 	return array
+}
+
+// Bubble is a simple generic definition of Bubble sort algorithm.
+func Bubble[T constraints.Ordered](arr []T) []T {
+	swapped := true
+	for swapped {
+		swapped = false
+		for i := 0; i < len(arr)-1; i++ {
+			if arr[i+1] < arr[i] {
+				arr[i+1], arr[i] = arr[i], arr[i+1]
+				swapped = true
+			}
+		}
+	}
+	return arr
 }
