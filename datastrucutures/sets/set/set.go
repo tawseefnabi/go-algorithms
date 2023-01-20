@@ -18,6 +18,12 @@ type Set interface {
 
 	// Add: adds new element to the set
 	Add(item any)
+
+	// Delete: deletes the passed element from the set if present
+	Delete(item any)
+
+	// GetItems: gives the array( []any ) of elements of the set.
+	GetItems() []any
 }
 
 type set struct {
@@ -29,4 +35,14 @@ func (st *set) Add(value any) {
 }
 func (st *set) Len() int {
 	return len(st.elements)
+}
+func (st *set) Delete(value any) {
+	delete(st.elements, value)
+}
+func (st *set) GetItems() []any {
+	keys := make([]any, 0, len(st.elements))
+	for k := range st.elements {
+		keys = append(keys, k)
+	}
+	return keys
 }
