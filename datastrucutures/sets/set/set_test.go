@@ -24,3 +24,8 @@ func Test_Delete(t *testing.T) {
 	set.Delete(2)
 	assert.Equal(t, set.Len(), 2)
 }
+
+func Test_In(t *testing.T) {
+	set := New(1, 2, 3)
+	assert.True(t, set.In(2))
+}
