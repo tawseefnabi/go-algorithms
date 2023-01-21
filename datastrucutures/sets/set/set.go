@@ -24,6 +24,9 @@ type Set interface {
 
 	// GetItems: gives the array( []any ) of elements of the set.
 	GetItems() []any
+
+	In(item any) bool
+	// IsSubsetOf: checks whether set is subset of set2 or not
 }
 
 type set struct {
@@ -45,4 +48,11 @@ func (st *set) GetItems() []any {
 		keys = append(keys, k)
 	}
 	return keys
+}
+
+func (st *set) In(value any) bool {
+	if _, in := st.elements[value]; in {
+		return true
+	}
+	return false
 }
