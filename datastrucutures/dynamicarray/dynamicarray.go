@@ -11,7 +11,10 @@
 // see dynamicarray.go, dynamicarray_test.go
 package dynamicarray
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 var defaultCapacity = 10
 
@@ -48,8 +51,28 @@ func (da *DynamicArray) Add(el any) {
 	da.Size++
 }
 
-// // GetData function return all value of array
+// Remove function is remove an element with the index
+func (da *DynamicArray) Remove(index int) error {
+	err := da.CheckRangeFromIndex(index)
+	if err != nil {
+		return err
+	}
+	copy(da.ElementData[index:], da.ElementData[index+1:da.Size])
+	da.ElementData[da.Size-1] = nil
+	da.Size--
+	return err
+}
+
+// GetData function return all value of array
 func (da *DynamicArray) GetData() []any {
 	return da.ElementData[:da.Size]
 
+}
+
+// CheckRangeFromIndex function it will check the range from the index
+func (da *DynamicArray) CheckRangeFromIndex(index int) error {
+	if index >= da.Size || index < 0 {
+		return errors.New("out of range")
+	}
+	return nil
 }

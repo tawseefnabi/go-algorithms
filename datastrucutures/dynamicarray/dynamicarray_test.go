@@ -1,6 +1,7 @@
 package dynamicarray
 
 import (
+	// "fmt"
 	"reflect"
 	"testing"
 )
@@ -30,9 +31,29 @@ func TestDynamicArray(t *testing.T) {
 		res = append(res, 30)
 		res = append(res, 40)
 		res = append(res, 50)
-		numbers.GetData()
 		if !reflect.DeepEqual(numbers.GetData(), res) {
 			t.Errorf("Expected  be [10 20 30 40 50] but got %v", numbers.GetData())
+		}
+	})
+
+	// Remove an Element inside the dynamic array with the index of array
+	t.Run("Remove Element into Dynamic Array", func(t *testing.T) {
+		if numbers.IsEmpty() != false {
+			t.Errorf("Expected be false but got %v", numbers.IsEmpty())
+		}
+		var res []any
+		res = append(res, 10)
+		res = append(res, 20)
+		res = append(res, 40)
+		res = append(res, 50)
+
+		// remove the element by the index
+		err := numbers.Remove(2)
+		if err != nil {
+			t.Errorf("Expected be [10, 30, 40, 50] but got an Error %v", err)
+		}
+		if !reflect.DeepEqual(numbers.GetData(), res) {
+			t.Errorf("Expected  be [10 20 40 50] but got %v", numbers.GetData())
 		}
 	})
 }
