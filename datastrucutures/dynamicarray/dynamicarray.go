@@ -11,8 +11,45 @@
 // see dynamicarray.go, dynamicarray_test.go
 package dynamicarray
 
+import "fmt"
+
+var defaultCapacity = 10
+
 type DynamicArray struct {
 	Size        int
 	Capacity    int
 	ElementData []any
+}
+
+// IsEmpty function is check that the array has value or not
+func (da *DynamicArray) IsEmpty() bool {
+	return da.Size == 0
+}
+
+// NewCapacity function increase the Capacity
+func (da *DynamicArray) NewCapacity() {
+	if da.Capacity == 0 {
+		da.Capacity = defaultCapacity
+	} else {
+		fmt.Println("++++++++++++ELSE capa", da)
+		da.Capacity = da.Capacity << 1
+	}
+	newElementData := make([]any, da.Capacity)
+	copy(newElementData, da.ElementData)
+	da.ElementData = newElementData
+}
+
+// Add function is add new element to our array
+func (da *DynamicArray) Add(el any) {
+	if da.Size == da.Capacity {
+		da.NewCapacity()
+	}
+	da.ElementData[da.Size] = el
+	da.Size++
+}
+
+// // GetData function return all value of array
+func (da *DynamicArray) GetData() []any {
+	return da.ElementData[:da.Size]
+
 }
