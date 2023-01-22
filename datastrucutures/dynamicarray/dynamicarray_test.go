@@ -1,7 +1,7 @@
 package dynamicarray
 
 import (
-	// "fmt"
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -54,6 +54,16 @@ func TestDynamicArray(t *testing.T) {
 		}
 		if !reflect.DeepEqual(numbers.GetData(), res) {
 			t.Errorf("Expected  be [10 20 40 50] but got %v", numbers.GetData())
+		}
+	})
+	t.Run("Get in Dynamic Array", func(t *testing.T) {
+		if numbers.IsEmpty() != false {
+			t.Errorf("Expected be false but got %v", numbers.IsEmpty())
+		}
+		// return one element with the index
+		getOne, _ := numbers.Get(2)
+		if getOne != 40 {
+			t.Errorf("Expected  be 40 but got %v", getOne)
 		}
 	})
 }

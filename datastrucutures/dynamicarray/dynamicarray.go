@@ -69,6 +69,15 @@ func (da *DynamicArray) GetData() []any {
 
 }
 
+// Get function is return one element with the index of array
+func (da *DynamicArray) Get(index int) (any, error) {
+	err := da.CheckRangeFromIndex(index)
+	if err != nil {
+		return nil, err
+	}
+	return da.ElementData[index], nil
+}
+
 // CheckRangeFromIndex function it will check the range from the index
 func (da *DynamicArray) CheckRangeFromIndex(index int) error {
 	if index >= da.Size || index < 0 {
