@@ -1,7 +1,6 @@
 package dynamicarray
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 )
@@ -66,4 +65,20 @@ func TestDynamicArray(t *testing.T) {
 			t.Errorf("Expected  be 40 but got %v", getOne)
 		}
 	})
+	// Put to add a value to specific index of Dynamic Array
+	t.Run("Put to Dynamic Array", func(t *testing.T) {
+		if numbers.IsEmpty() != false {
+			t.Errorf("Expected be false but got %v", numbers.IsEmpty())
+		}
+	})
+	// change value of specific index
+	err := numbers.Put(0, 100)
+	if err != nil {
+		t.Errorf("Expected be [10, 30, 40, 50] but got an Error %v", err)
+	}
+
+	getOne, _ := numbers.Get(0)
+	if getOne != 100 {
+		t.Errorf("Expected be 100 but got %v", getOne)
+	}
 }

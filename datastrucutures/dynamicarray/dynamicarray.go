@@ -51,6 +51,16 @@ func (da *DynamicArray) Add(el any) {
 	da.Size++
 }
 
+// Put function is change/update the value in array with the index and new value
+func (da *DynamicArray) Put(index int, element any) error {
+	err := da.CheckRangeFromIndex(index)
+	if err != nil {
+		return err
+	}
+	da.ElementData[index] = element
+	return nil
+}
+
 // Remove function is remove an element with the index
 func (da *DynamicArray) Remove(index int) error {
 	err := da.CheckRangeFromIndex(index)
