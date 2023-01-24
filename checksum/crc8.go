@@ -7,7 +7,9 @@
 
 package checksum
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // CRCModel contains the necessary parameters for calculating the DRC algorithm
 type CRCModel struct {
@@ -22,6 +24,23 @@ type CRCModel struct {
 // CRC8 calculates CRC8 checksum of the given data.
 
 func CRC8(data []byte, model CRCModel) uint8 {
-	fmt.Println("CRC8--", data, model)
+	table := getTable(model)
+	fmt.Println("tt", table)
 	return 12
+}
+
+func getTable(model CRCModel) []uint8 {
+	table := make([]uint8, 256)
+	for i := 0; i < 256; i++ {
+		crc := uint8(i)
+		for j := 0; j < 8; j++ {
+			isSetBit := (crc & 0x80) != 0
+			crc <<= 1
+			if isSetBit {
+				crc ^= model.Poly
+			}
+		}
+		table[i] = crc
+	}
+	return table
 }
