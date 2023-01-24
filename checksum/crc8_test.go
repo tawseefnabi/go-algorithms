@@ -20,7 +20,6 @@ func TestCalculateCRC8(t *testing.T) {
 	}{
 		CRC8.Name, data, CRC8, 0xF4,
 	}
-	fmt.Println("data", data)
 	t.Run(CRC8.Name, func(t *testing.T) {
 		fmt.Println(checksum.CRC8(test.data, test.model))
 	})

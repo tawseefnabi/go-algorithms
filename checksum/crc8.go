@@ -8,7 +8,7 @@
 package checksum
 
 import (
-	"fmt"
+	"math/bits"
 )
 
 // CRCModel contains the necessary parameters for calculating the DRC algorithm
@@ -25,10 +25,30 @@ type CRCModel struct {
 
 func CRC8(data []byte, model CRCModel) uint8 {
 	table := getTable(model)
-	fmt.Println("tt", table)
-	return 12
+	crcResult := model.Init
+	crcResult = addBytes(data, model, crcResult, table)
+	if model.RefOut {
+		crcResult = bits.Reverse8(crcResult)
+	}
+	return crcResult ^ model.XorOut
 }
 
+// This function get the result of adding the bytes in data to the crc
+func addBytes(data []byte, model CRCModel, crcResult uint8, table []uint8) uint8 {
+	if model.RefIn {
+		for _, d := range data {
+			d = bits.Reverse8(d)
+			crcResult = table[crcResult^d]
+		}
+		return crcResult
+	}
+	for _, d := range data {
+		crcResult = table[crcResult^d]
+	}
+	return crcResult
+}
+
+// This function get 256-byte (256x8) table for efficient processing.
 func getTable(model CRCModel) []uint8 {
 	table := make([]uint8, 256)
 	for i := 0; i < 256; i++ {
